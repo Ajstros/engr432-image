@@ -6,3 +6,5 @@ Simple Python package for image blurring, color shifting.
 ## ImageObject
 ![ImageObject Diagram](docs/ImageObject.png)
 
+## Flow Chart
+![Flow Chart](docs/flow_chart.png)
