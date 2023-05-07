@@ -39,3 +39,22 @@ class ImageObject:
 
             # At this point the image has opened or an error has been raised
             self.data = np.array(im).T
+
+    def pixelate(self, square_size):
+        r, g, b = self.data
+
+        for c in [r, g, b]:
+            [rows, cols] = c.shape
+            for i in range(0, rows, square_size):
+                for j in range(0, cols, square_size):
+                    c[i:i+square_size, j:j+square_size] = np.mean(c[i:i+square_size, j:j+square_size])
+
+        self.data = np.stack((r, g, b))
+
+    def save_image(self, output_file=None):
+        if output_file is None:
+            output_file = self.file_name
+
+        r, g, b = self.data
+        im = Image.fromarray(np.dstack([item.T for item in (r, g, b)]))
+        im.save(output_file)
