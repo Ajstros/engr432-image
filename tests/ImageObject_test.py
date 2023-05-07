@@ -8,18 +8,22 @@ NOTE: run this test from the tests directory with:
 
 import pytest
 import numpy as np
-from PIL import UnidentifiedImageError
+from PIL import Image, ImageChops, UnidentifiedImageError
+import os
 
 # Add ../ path to PATH if import fails, meaning image432 package not installed
 try:
     from image432.ImageObject import ImageObject
 except ModuleNotFoundError:
     import sys
-    import os
     sys.path.insert(0, os.path.abspath('../'))
     sys.path.insert(0, os.path.abspath('.'))
     print(f'Module not found, adding to path: {sys.path[0]}')
     from image432.ImageObject import ImageObject
+
+
+# Tests
+
 
 def test_init_no_input():
     # Test no input
@@ -27,9 +31,10 @@ def test_init_no_input():
     assert img.file_name == None
     assert img.data == None
 
+
 def test_init_file_exists():
     # Test input of a file that exists
-    file_name = 'test_image.jpg'
+    file_name = 'test_image.png'
     img = ImageObject(file_name)
     assert img.file_name == file_name
     assert type(img.data) == np.ndarray
@@ -39,9 +44,10 @@ def test_init_file_exists():
     assert img.file_name == file_name
     assert type(img.data) == np.ndarray
 
+
 def test_init_file_not_exists():
     # Test input of a file that does not exist
-    fake_file_name = 'xcvbjytf.jpg'
+    fake_file_name = 'xcvbjytf.png'
     try:
         img = ImageObject(fake_file_name)
         # Should have hit an error by now, fail otherwise
@@ -56,6 +62,7 @@ def test_init_file_not_exists():
         assert False
     except FileNotFoundError:
         assert True
+
 
 def test_init_file_not_image():
     # Test input of a file that exists, but is not an image
@@ -80,21 +87,38 @@ def test_init_file_not_image():
 def test_grayscale():
     pass
 
+
 @pytest.mark.skip(reason="Test not created yet")
 def test_change_brightness():
     pass
 
+
 def test_save_image():
-    pass
+    in_file = "test_image.png"
+    out_file = "test_save_image.png"
+
+    if os.path.exists(out_file):
+        os.remove(out_file)
+
+    img = ImageObject(in_file)
+    img.save_image(out_file)
+    im1 = Image.open(in_file)
+    im2 = Image.open(out_file)
+    print(ImageChops.difference(im1, im2))
+    assert ImageChops.difference(im1, im2).getbbox() is None
+
 
 @pytest.mark.skip(reason="Test not created yet")
 def test_convolve():
     pass
 
+
 @pytest.mark.skip(reason="Test not created yet")
 def test_color_shift():
     pass
 
+
+@pytest.mark.skip(reason="Test not created yet")
 def test_pixelate():
     pass
 
