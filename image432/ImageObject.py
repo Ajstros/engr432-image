@@ -1,7 +1,6 @@
-"""
-ImageObject
-===========
-ImageObject holds file name, image data, and has methods for changing the image. Intended use is something like:
+"""ImageObject holds file name, image data, and has methods for changing the image.
+
+Intended use is something like:
 
     >>> img = ImageObject('image.jpg')
     >>> img.pixelate(3)
