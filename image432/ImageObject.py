@@ -41,6 +41,16 @@ class ImageObject:
             self.data = np.array(im).T
 
     def pixelate(self, square_size):
+        """Pixelate the image
+
+        Pixelation is done by setting a square of pixels of length square_size to the average r, g, and b values of the pixels in that square.
+
+        Parameters
+        ----------
+        square_size : int
+            Length of the square of pixels (in pixels) to average.
+        """
+
         r, g, b = self.data
 
         for c in [r, g, b]:
@@ -52,6 +62,14 @@ class ImageObject:
         self.data = np.stack((r, g, b))
 
     def save_image(self, output_file=None):
+        """Save the image to a file.
+
+        Parameters
+        ----------
+        output_file : str
+            Path to save the image file at. Defaults to self.file_name if left as None.
+        """
+
         if output_file is None:
             output_file = self.file_name
 
