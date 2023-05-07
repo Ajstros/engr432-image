@@ -1,6 +1,8 @@
 # engr432-image
 Simple Python package for image blurring, color shifting.
 
+[Documentation](https://engr432-image.readthedocs.io/en/latest/)
+
 # Diagrams
 
 ## ImageObject
