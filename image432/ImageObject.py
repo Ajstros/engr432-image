@@ -13,6 +13,7 @@ This example shows loading an image from a file, pixelating it into 3x3 pixel sq
 from PIL import Image, UnidentifiedImageError
 import numpy as np
 import os
+import errno
 
 
 class ImageObject:
@@ -29,15 +30,20 @@ class ImageObject:
     def __init__(self, file_name=None):
         self.file_name = file_name
 
-        if self.file_name is not None and os.path.isfile(self.file_name):
-            # File specified and exists
-            try:
-                im = Image.open(file_name)
-            except UnidentifiedImageError:
-                raise UnidentifiedImageError("This file is probably not an image")
+        if self.file_name is not None:
+            if os.path.isfile(self.file_name):
+                # File specified and exists
+                try:
+                    im = Image.open(file_name)
+                except UnidentifiedImageError:
+                    raise UnidentifiedImageError("This file is probably not an image")
 
-            # At this point the image has opened or an error has been raised
-            self.data = np.array(im).T
+                # At this point the image has opened or an error has been raised
+                self.data = np.array(im).T
+            else:
+                raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), file_name)
+        else:
+            self.data = None
 
     def pixelate(self, square_size):
         """Pixelate the image
