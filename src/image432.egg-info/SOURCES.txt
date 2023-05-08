@@ -1,0 +1,9 @@
+LICENSE
+README.md
+pyproject.toml
+src/image432/ImageObject.py
+src/image432/__init__.py
+src/image432.egg-info/PKG-INFO
+src/image432.egg-info/SOURCES.txt
+src/image432.egg-info/dependency_links.txt
+src/image432.egg-info/top_level.txt

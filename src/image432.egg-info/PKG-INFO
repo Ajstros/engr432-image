@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: image432
+Version: 0.0.1
+Summary: A simple image package to demonstrate project development
+Author: Will Heuer
+Author-email: Abe Stroschein <ajstros@duck.com>
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# engr432-image
+Simple Python package for image blurring, color shifting.
+
+# Diagrams
+
+## ImageObject
+![ImageObject Diagram](docs/ImageObject.png)
+
+## Flow Chart
+![Flow Chart](docs/flow_chart.png)
