@@ -15,12 +15,11 @@ import os
 try:
     from image432.ImageObject import ImageObject
 except ModuleNotFoundError:
-    # import sys
-    # sys.path.insert(0, os.path.abspath('../src'))
-    # sys.path.insert(0, os.path.abspath('.src'))
-    # print(f'Module not found, adding to path: {sys.path[0]}')
-    # from image432.ImageObject import ImageObject
-    #
+    import sys
+    sys.path.insert(0, os.path.abspath('../src'))
+    sys.path.insert(0, os.path.abspath('.src'))
+    print(f'Module not found, adding to path: {sys.path[0]}')
+    from image432.ImageObject import ImageObject
     pass
 
 # Tests
