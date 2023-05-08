@@ -36,21 +36,22 @@ class ImageObject:
                 try:
                     im = Image.open(file_name)
                 except UnidentifiedImageError:
-                    raise UnidentifiedImageError("This file is probably not an image")
+                    raise UnidentifiedImageError(
+                        "This file is probably not an image")
 
                 # At this point the image has opened or an error has been raised
                 self.data = np.array(im).T
             else:
-                raise FileNotFoundError(
-                    errno.ENOENT, os.strerror(errno.ENOENT), file_name
-                )
+                raise FileNotFoundError(errno.ENOENT,
+                                        os.strerror(errno.ENOENT), file_name)
         else:
             self.data = None
 
     def pixelate(self, square_size):
         """Pixelate the image
 
-        Pixelation is done by setting a square of pixels of length square_size to the average r, g, and b values of the pixels in that square.
+        Pixelation is done by setting a square of pixels of length square_size to
+        the average r, g, and b values of the pixels in that square.
 
         Parameters
         ----------
@@ -64,9 +65,9 @@ class ImageObject:
             [rows, cols] = c.shape
             for i in range(0, rows, square_size):
                 for j in range(0, cols, square_size):
-                    c[i : i + square_size, j : j + square_size] = np.mean(
-                        c[i : i + square_size, j : j + square_size]
-                    )
+                    c[i:i + square_size,
+                      j:j + square_size] = np.mean(c[i:i + square_size,
+                                                     j:j + square_size])
 
         self.data = np.stack((r, g, b))
 

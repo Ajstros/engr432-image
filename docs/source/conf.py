@@ -16,7 +16,6 @@ import os
 # Add image432 to path for autodoc use
 sys.path.insert(0, os.path.abspath("../../"))
 
-
 # -- Project information -----------------------------------------------------
 
 project = "image432"
@@ -25,7 +24,6 @@ author = "Abe Stroschein and Will Heuer"
 
 # The full version, including alpha/beta/rc tags
 release = "0.0.1"
-
 
 # -- General configuration ---------------------------------------------------
 
@@ -44,7 +42,6 @@ templates_path = ["_templates"]
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
-
 
 # -- Options for HTML output -------------------------------------------------
 

@@ -30,8 +30,8 @@ except ModuleNotFoundError:
 def test_init_no_input():
     # Test no input
     img = ImageObject()
-    assert img.file_name == None
-    assert img.data == None
+    assert img.file_name is None
+    assert img.data is None
 
 
 def test_init_file_exists():
@@ -51,7 +51,7 @@ def test_init_file_not_exists():
     # Test input of a file that does not exist
     fake_file_name = "xcvbjytf.png"
     try:
-        img = ImageObject(fake_file_name)
+        ImageObject(fake_file_name)
         # Should have hit an error by now, fail otherwise
         assert False
     except FileNotFoundError:
@@ -59,7 +59,7 @@ def test_init_file_not_exists():
 
     # Same test but now specify file_name with keyword
     try:
-        img = ImageObject(fake_file_name)
+        ImageObject(fake_file_name)
         # Should have hit an error by now, fail otherwise
         assert False
     except FileNotFoundError:
@@ -70,7 +70,7 @@ def test_init_file_not_image():
     # Test input of a file that exists, but is not an image
     file_name = "not_image.txt"
     try:
-        img = ImageObject(file_name)
+        ImageObject(file_name)
         # Should have hit an error by now, fail otherwise
         assert False
     except UnidentifiedImageError:
@@ -78,7 +78,7 @@ def test_init_file_not_image():
 
     # Same test but now specify file_name with keyword
     try:
-        img = ImageObject(file_name)
+        ImageObject(file_name)
         # Should have hit an error by now, fail otherwise
         assert False
     except UnidentifiedImageError:
