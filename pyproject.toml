@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "image432"
+version = "0.0.1"
+authors = [
+  { name="Abe Stroschein", email="ajstros@duck.com" },
+  { name="Will Heuer" },
+]
+description = "A simple image package to demonstrate project development"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
