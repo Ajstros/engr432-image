@@ -41,7 +41,9 @@ class ImageObject:
                 # At this point the image has opened or an error has been raised
                 self.data = np.array(im).T
             else:
-                raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), file_name)
+                raise FileNotFoundError(
+                    errno.ENOENT, os.strerror(errno.ENOENT), file_name
+                )
         else:
             self.data = None
 

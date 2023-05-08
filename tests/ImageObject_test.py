@@ -16,10 +16,12 @@ try:
     from image432.ImageObject import ImageObject
 except ModuleNotFoundError:
     import sys
-    sys.path.insert(0, os.path.abspath('../src'))
-    sys.path.insert(0, os.path.abspath('.src'))
-    print(f'Module not found, adding to path: {sys.path[0]}')
+
+    sys.path.insert(0, os.path.abspath("../src"))
+    sys.path.insert(0, os.path.abspath(".src"))
+    print(f"Module not found, adding to path: {sys.path[0]}")
     from image432.ImageObject import ImageObject
+
     pass
 
 # Tests
@@ -34,7 +36,7 @@ def test_init_no_input():
 
 def test_init_file_exists():
     # Test input of a file that exists
-    file_name = 'test_image.png'
+    file_name = "test_image.png"
     img = ImageObject(file_name)
     assert img.file_name == file_name
     assert type(img.data) == np.ndarray
@@ -47,14 +49,14 @@ def test_init_file_exists():
 
 def test_init_file_not_exists():
     # Test input of a file that does not exist
-    fake_file_name = 'xcvbjytf.png'
+    fake_file_name = "xcvbjytf.png"
     try:
         img = ImageObject(fake_file_name)
         # Should have hit an error by now, fail otherwise
         assert False
     except FileNotFoundError:
         assert True
-    
+
     # Same test but now specify file_name with keyword
     try:
         img = ImageObject(fake_file_name)
@@ -66,14 +68,14 @@ def test_init_file_not_exists():
 
 def test_init_file_not_image():
     # Test input of a file that exists, but is not an image
-    file_name = 'not_image.txt'
+    file_name = "not_image.txt"
     try:
         img = ImageObject(file_name)
         # Should have hit an error by now, fail otherwise
         assert False
     except UnidentifiedImageError:
         assert True
-    
+
     # Same test but now specify file_name with keyword
     try:
         img = ImageObject(file_name)
@@ -121,4 +123,3 @@ def test_color_shift():
 @pytest.mark.skip(reason="Test not created yet")
 def test_pixelate():
     pass
-
