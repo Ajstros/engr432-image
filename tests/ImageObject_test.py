@@ -106,13 +106,45 @@ def test_save_image():
     img.save_image(out_file)
     im1 = Image.open(in_file)
     im2 = Image.open(out_file)
-    print(ImageChops.difference(im1, im2))
     assert ImageChops.difference(im1, im2).getbbox() is None
 
 
-@pytest.mark.skip(reason="Test not created yet")
-def test_convolve():
-    pass
+def test_convolve_zeros():
+    # Convolve with a kernel of zeros should give a black image
+    # Note that borders will still be the same
+    in_file = "small.png"
+    out_file = "small_convolve_zeros.png"
+    check_file = "small_convolve_zeros_check.png"
+    k = np.zeros([3, 3])
+
+    if os.path.exists(out_file):
+        os.remove(out_file)
+
+    img = ImageObject(in_file)
+    img.convolve(k)
+    img.save_image(out_file)
+    im1 = Image.open(out_file)
+    im2 = Image.open(check_file)
+    assert ImageChops.difference(im1, im2).getbbox() is None
+
+
+def test_convolve_same():
+    # Convolve with a kernel of zeros with a one in the center should give the same image
+    in_file = "small.png"
+    out_file = "small_convolve_same.png"
+    check_file = in_file
+    k = np.zeros([3, 3])
+    k[1, 1] = 1
+
+    if os.path.exists(out_file):
+        os.remove(out_file)
+
+    img = ImageObject(in_file)
+    img.convolve(k)
+    img.save_image(out_file)
+    im1 = Image.open(out_file)
+    im2 = Image.open(check_file)
+    assert ImageChops.difference(im1, im2).getbbox() is None
 
 
 @pytest.mark.skip(reason="Test not created yet")
