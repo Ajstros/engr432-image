@@ -1,3 +1,5 @@
+[![Documentation Status](https://readthedocs.org/projects/engr432-image/badge/?version=latest)](https://engr432-image.readthedocs.io/en/latest/?badge=latest)
+
 # engr432-image
 Simple Python package for image blurring, color shifting.
 
