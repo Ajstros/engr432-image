@@ -71,6 +71,44 @@ class ImageObject:
 
         self.data = np.stack((r, g, b))
 
+    def convolve(self, kernel):
+        """Assign each pixel the weighted average of the kernel centered about it.
+
+        A kernel is a square matrix whose values are weights for the average. The kernel is shifted
+        through the image so it is centered at each pixel (borders are skipped), and it is multiplied
+        elementwise by the image pixel RGB values. Those values are added up, and the total is divided
+        by the sum of the kernel. That is the new value of the pixel.
+
+        Parameters
+        ----------
+        kernel : np.ndarray
+            Square matrix (odd x odd) kernel to apply to the image.
+        """
+
+        # Check kernel type
+        if type(kernel) != np.ndarray:
+            raise TypeError("Expected kernel of type np.ndarray")
+
+        rows, cols = kernel.shape
+        # kernel must have odd number rows and columns so there is a center element
+        # We will check if either rows or columns are even and raise an error
+        if (rows % 2 == 0) or (cols % 2 == 0):
+            raise ValueError("Kernel must have odd number rows and columns")
+        # kernel must be square
+        if rows != cols:
+            raise ValueError("Kernel must be square (nrows == ncols)")
+
+        kernel_sum = np.sum(kernel)
+
+        # We exclude the border pixels from this operation
+        img_rows, img_cols = self.data.shape[1:]
+        for r in range(rows // 2, img_rows-(rows // 2)):
+            for c in range(cols // 2, img_cols-(cols // 2)):
+                # Do for each color (R, G, B)
+                for color in [0, 1, 2]:
+                    mult_matrix = self.data[color, r-(rows // 2):r+(rows // 2)+1, c-(cols // 2):c+(cols // 2)+1] * kernel
+                    self.data[color, r, c] = np.sum(mult_matrix) // kernel_sum
+
     def save_image(self, output_file=None):
         """Save the image to a file.
 
